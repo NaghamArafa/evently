@@ -1,21 +1,21 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
-import 'package:evently/event/screens/home/home.dart';
+import 'package:evently/event/screens/home/home_screen.dart';
+import 'package:evently/event/utl/app_assets.dart';
 import 'package:evently/event/utl/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class Login extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   static const String routeName = "/login";
 
-  const Login({super.key});
+  const LoginScreen({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginScreenState extends State<LoginScreen> {
   OutlineInputBorder Border = OutlineInputBorder(
       borderRadius: BorderRadius.circular(16),
       borderSide: BorderSide(color: AppColors.gray));
@@ -44,7 +44,7 @@ class _LoginState extends State<Login> {
                   margin: EdgeInsets.only(bottom: 24),
                   width: MediaQuery.of(context).size.width * 0.34,
                   height: MediaQuery.of(context).size.height * 0.22,
-                  child: Image.asset("assets/Logo.png")),
+                  child: Image.asset(AppAssets.appVerticalLogoImage)),
               TextFormField(
                 controller: emailController,
                 // validator: (value) => ValidEmail(value),
@@ -59,7 +59,7 @@ class _LoginState extends State<Login> {
                   prefixIcon: Container(
                       margin: const EdgeInsets.symmetric(vertical: 14),
                       child: ImageIcon(
-                        AssetImage("assets/email.png"),
+                        AssetImage(AppAssets.email),
                         color: AppColors.gray,
                       )),
                 ),
@@ -84,7 +84,7 @@ class _LoginState extends State<Login> {
                     prefixIcon: Container(
                         margin: const EdgeInsets.symmetric(vertical: 14),
                         child: ImageIcon(
-                          AssetImage("assets/password.png"),
+                          AssetImage(AppAssets.password),
                           color: AppColors.gray,
                         )),
                     suffixIcon: IconButton(
@@ -199,7 +199,7 @@ class _LoginState extends State<Login> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset("assets/google.png"),
+                      Image.asset(AppAssets.google),
                       SizedBox(
                         width: 10,
                       ),
@@ -242,11 +242,11 @@ class _LoginState extends State<Login> {
                     iconBuilder: (value, foreground) {
                       if (value == "ar") {
                         return CircleAvatar(
-                          backgroundImage: AssetImage("assets/EG.png"),
+                          backgroundImage: AssetImage(AppAssets.AR),
                         );
                       } else {
                         return CircleAvatar(
-                          backgroundImage: AssetImage("assets/LR.png"),
+                          backgroundImage: AssetImage(AppAssets.ENG),
                         );
                       }
                     },

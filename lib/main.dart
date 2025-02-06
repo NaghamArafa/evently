@@ -1,5 +1,6 @@
-import 'package:evently/event/screens/home/home.dart';
-import 'package:evently/event/screens/login.dart';
+import 'package:evently/event/screens/home/home_screen.dart';
+import 'package:evently/event/screens/login/login_screen.dart';
+import 'package:evently/event/screens/onBoarding/on_boarding.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -20,10 +21,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        Login.routeName: (_) => const Login(),
+        LoginScreen.routeName: (_) => const LoginScreen(),
         HomeScreen.routeName: (_) => HomeScreen(),
+        OnboardingScreen.routeName: (_) => OnboardingScreen(),
       },
-      initialRoute: Login.routeName,
+      initialRoute: OnboardingScreen.routeName,
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
