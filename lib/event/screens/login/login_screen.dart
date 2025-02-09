@@ -1,9 +1,11 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
+import 'package:evently/event/core/app_assets.dart';
+import 'package:evently/event/core/app_colors.dart';
 import 'package:evently/event/screens/home/home_screen.dart';
-import 'package:evently/event/utl/app_assets.dart';
-import 'package:evently/event/utl/app_colors.dart';
+import 'package:evently/event/screens/signup_screen/signup_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
+  late AppLocalizations appLocalizations;
   var passwordController = TextEditingController();
   var emailController = TextEditingController();
 
@@ -147,20 +150,16 @@ class _LoginScreenState extends State<LoginScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account ? "),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Text(
-                      textAlign: TextAlign.end,
-                      "Create account",
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: AppColors.purple, // Color of the text
-                        fontSize: 16, // Font size
-                        fontWeight: FontWeight.bold, // Font weight
-                      ),
-                    ),
+                  Text(
+                    "Dont Have Account ?",
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, SignupScreen.routeName);
+                    },
+                    child: Text("Create account"),
+                  )
                 ],
               ),
               Center(

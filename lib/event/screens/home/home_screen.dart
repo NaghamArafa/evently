@@ -1,114 +1,83 @@
+import 'package:evently/event/core/app_assets.dart';
+import 'package:evently/event/core/app_colors.dart';
+import 'package:evently/event/screens/home/tabs/home_tab/home_tab.dart';
+import 'package:evently/event/screens/home/tabs/love_tab/favorites_tab.dart';
+import 'package:evently/event/screens/home/tabs/map_tab/map_tab.dart';
+import 'package:evently/event/screens/home/tabs/profile_tab/profile_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class HomeScreen extends StatelessWidget {
-  static const String routeName = "/home";
+class HomeScreen extends StatefulWidget {
+  static const routeName = '/home-screen';
+
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  List<Widget> tabs = [
+    const HomeTab(),
+    const MapTab(),
+    FavoritesTab(),
+    const ProfileTab(),
+  ];
+  int currentIndex = 0;
+
+  late AppLocalizations appLocalizations;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        title: Text("Welcome Back, John Safwat"),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: Text("EN"),
-            ),
-          )
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text("Cairo, Egypt",
-                style: TextStyle(fontSize: 16, color: Colors.grey[700])),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                FilterChip(label: Text("All"), onSelected: (val) {}),
-                FilterChip(label: Text("Sport"), onSelected: (val) {}),
-                FilterChip(label: Text("Birthday"), onSelected: (val) {}),
-              ],
-            ),
-          ),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.all(16),
-              children: [
-                EventCard(
-                    date: "21 Nov",
-                    title: "Birthday",
-                    description: "This is a Birthday Party"),
-                EventCard(
-                    date: "22 Nov",
-                    title: "Meeting",
-                    description: "Meeting for Updating The Development Method"),
-                EventCard(
-                    date: "22 Nov",
-                    title: "Exhibition",
-                    description: "An Art Exhibition Event"),
-              ],
-            ),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.map), label: "Map"),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "Love"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-        ],
-      ),
-    );
-  }
-}
-
-class EventCard extends StatelessWidget {
-  final String date;
-  final String title;
-  final String description;
-
-  const EventCard(
-      {required this.date, required this.title, required this.description});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(date,
-                style:
-                    TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
-            SizedBox(height: 8),
-            Text(title,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            SizedBox(height: 4),
-            Text(description, style: TextStyle(color: Colors.grey[600])),
-            Align(
-              alignment: Alignment.centerRight,
-              child: IconButton(
-                icon: Icon(Icons.favorite_border),
-                onPressed: () {},
-              ),
-            ),
+        floatingActionButton: buildFab(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        backgroundColor: Colors.white,
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: (index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
+          currentIndex: currentIndex,
+          items: const [
+            BottomNavigationBarItem(
+                activeIcon: ImageIcon(AssetImage(AppAssets.homeActive)),
+                backgroundColor: AppColors.purple,
+                icon: ImageIcon(AssetImage(AppAssets.homeIcon)),
+                label: 'home'),
+            BottomNavigationBarItem(
+                activeIcon: ImageIcon(AssetImage(AppAssets.mapActive)),
+                backgroundColor: AppColors.purple,
+                icon: ImageIcon(AssetImage(AppAssets.mapIcon)),
+                label: 'map'),
+            BottomNavigationBarItem(
+                activeIcon: ImageIcon(AssetImage(AppAssets.loveActive)),
+                backgroundColor: AppColors.purple,
+                icon: ImageIcon(AssetImage(AppAssets.loveIcon)),
+                label: 'love'),
+            BottomNavigationBarItem(
+                activeIcon: ImageIcon(AssetImage(AppAssets.profileActive)),
+                backgroundColor: AppColors.purple,
+                icon: ImageIcon(AssetImage(AppAssets.profileIcon)),
+                label: 'profile'),
           ],
         ),
+        body: tabs[currentIndex]);
+  }
+
+  FloatingActionButton buildFab() {
+    return FloatingActionButton(
+      onPressed: () {
+        // Navigator.pushNamed(context, AddEvent.routeName);
+      },
+      backgroundColor: AppColors.purple,
+      shape: const CircleBorder(
+          side: BorderSide(width: 5, color: AppColors.white)),
+      child: const Icon(
+        Icons.add,
+        color: AppColors.white,
+        size: 30,
       ),
     );
   }

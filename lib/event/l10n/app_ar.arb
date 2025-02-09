@@ -1,0 +1,21 @@
+{
+  "language": "اللغة",
+  "theme": "السمة",
+  "personalizeYourExperience": "خصص تجربتك",
+  "setupScreenDescription": "اختر السمة واللغة المفضلة لديك للبدء بتجربة مريحة ومخصصة تناسب أسلوبك.",
+  "letsStart":"هيا بنا",
+  "email": "البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "forgetPassword": "نسيت كلمة المرور",
+  "login": "تسجيل الدخول",
+  "googleLogin": "تسجيل الدخول باستخدام Google",
+  "dontHaveAccount": "ليس لديك حساب؟",
+  "signup": "إنشاء حساب",
+  "register": "تسجيل",
+  "name": "الاسم",
+  "repassword": "إعادة كلمة المرور",
+  "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+  "loginNow": "تسجيل الدخول الآن",
+  "createAccount": "إنشاء حساب"
+}
+
