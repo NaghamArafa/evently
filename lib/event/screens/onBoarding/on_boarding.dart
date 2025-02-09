@@ -1,10 +1,9 @@
 import 'package:evently/event/core/app_assets.dart';
 import 'package:evently/event/core/app_colors.dart';
-import 'package:evently/event/core/app_styles.dart';
 import 'package:evently/event/core/provider/theme_provider.dart';
-import 'package:evently/event/screens/home/home_screen.dart';
 import 'package:evently/event/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -16,50 +15,40 @@ class OnBoardingScreen extends StatefulWidget {
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   late ThemeProvider themeProvider;
+  late AppLocalizations appLocalizations;
 
   final PageController pageController = PageController();
   int currentIndex = 0;
 
-  final List<Map<String, String>> onboardingData = [
-    {
-      "image": AppAssets.onBoardingPage1,
-      "imageDark": AppAssets.onBoardingPage1,
-      "title": "Find Events That Inspire You",
-      "description":
-          "Dive into a world of events crafted to fit your unique interests. Whether you're into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you."
-    },
-    {
-      "image": AppAssets.onBoardingPage2Light,
-      "imageDark": AppAssets.onBoardingPage2Dark,
-      "title": "Effortless Event Planning",
-      "description":
-          "Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests."
-    },
-    {
-      "image": AppAssets.onBoardingPage3Light,
-      "imageDark": AppAssets.onBoardingPage3Dark,
-      "title": "Connect with Friends & Share Moments",
-      "description":
-          "Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories."
-    },
-  ];
-
-  void nextPage() {
-    if (currentIndex < onboardingData.length - 1) {
-      pageController.nextPage(
-          duration: Duration(milliseconds: 300), curve: Curves.ease);
-    } else {
-      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     themeProvider = Provider.of<ThemeProvider>(context);
+    appLocalizations =
+        AppLocalizations.of(context) ?? AppLocalizations.of(context)!;
+
+    final List<Map<String, String>> onboardingData = [
+      {
+        "image": AppAssets.onBoardingPage1,
+        "imageDark": AppAssets.onBoardingPage1,
+        "title": appLocalizations.title1,
+        "description": appLocalizations.des1
+      },
+      {
+        "image": AppAssets.onBoardingPage2Light,
+        "imageDark": AppAssets.onBoardingPage2Dark,
+        "title": appLocalizations.title2,
+        "description": appLocalizations.des2
+      },
+      {
+        "image": AppAssets.onBoardingPage3Light,
+        "imageDark": AppAssets.onBoardingPage3Dark,
+        "title": appLocalizations.title3,
+        "description": appLocalizations.des3
+      },
+    ];
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.white,
         body: Column(
           children: [
             Expanded(
@@ -72,7 +61,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   });
                 },
                 itemBuilder: (context, index) {
-                  return buildScreen(context, onboardingData, index);
+                  return (buildScreen(context, onboardingData, index));
                 },
               ),
             ),
@@ -109,7 +98,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               Expanded(
                 child: Text(
                   onboardingData[index]["title"]!,
-                  style: AppStyles.titleStyle,
+                  style: Theme.of(context).textTheme.labelLarge,
                   textAlign: TextAlign.start,
                 ),
               ),
@@ -119,7 +108,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           Text(
             onboardingData[index]["description"]!,
             textAlign: TextAlign.start,
-            style: AppStyles.desStyle,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           Spacer(),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -140,7 +129,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             color: AppColors.purple, width: 1), // Purple border
                       ),
                       child: CircleAvatar(
-                        backgroundColor: AppColors.white,
+                        backgroundColor: Colors.transparent,
                         child: Icon(Icons.arrow_back_outlined,
                             color: AppColors.purple),
                       ),
@@ -185,7 +174,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         color: AppColors.purple, width: 1), // Purple border
                   ),
                   child: CircleAvatar(
-                    backgroundColor: AppColors.white,
+                    backgroundColor: Colors.transparent,
                     child: Icon(Icons.arrow_forward_outlined,
                         color: AppColors.purple),
                   ),
